@@ -11,6 +11,7 @@ qui permettra d'éxcécuter le code en python.
 Pour pouvoir utiliser les broches du GPIO, nous avons utilisé la librairie wiringPi permettant de travailler avec.
 
 Dans le cadre du capteur à ultrason, le TRIGGER est branché sur le broche WiringPi 8 soir la broche physique 3 et l'ECHO sur le broche WiringPi 9 soit la broche physique 5
+https://fr.pinout.xyz/
 
 Toutefois, nous avons pu réaliser des axes d'amélioration, par exemple nous avons pu envoyer les valeurs de distances dans une base de données ou un serveur. Nous avons commencer à coder pour envoyer sur le protocole TCP dans un serveur les informations mais nous avons pas eu le temps.
 
