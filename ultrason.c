@@ -55,7 +55,8 @@ FILE* acquisitionTemperature(int nombreAcquisition){
 	wiringPiSetup(); // initialise les broches GPIO du Raspberry Pi
 	// configuration fichier
 	dataStock = fopen("data.txt", "w");
-	
+	float maximum = 0;
+	float minimum = 0;
 	float distance[nombreAcquisition];
 	
 
@@ -94,11 +95,27 @@ FILE* acquisitionTemperature(int nombreAcquisition){
 		}
 	}
 	
-		printf("capture de la photo ..\n");
-		strcpy(cmd,"sudo python photo.py"); // commande python excécute
-		system(cmd);
-		printf("photo prise\n");
+	// determination valeur max et min
+	for (int i = 0; i<nombreAcquisition; i++){
+		if(distance[i]>maximum){
+			maximum = distance[i];
+		}
+	}
+	
+	for (int i = 0; i<nombreAcquisition; i++){
+		if(distance[i]<minimum){
+			minimum = distance[i];
+		}
+	}
 
+	fprintf(dataStock, "valeur minimale : %f\n", minimum); 
+	fprintf(dataStock, "valeur maximale : %f\n", maximum); 
+
+	
+	printf("capture de la photo ..\n");
+	strcpy(cmd,"sudo python photo.py"); // commande python excécute
+	system(cmd);
+	printf("photo prise\n");
 
 	return dataStock;
 }
@@ -169,3 +186,4 @@ void send_file(FILE *fp, int sockfd){
     bzero(data, SIZE);
   }
 }
+
